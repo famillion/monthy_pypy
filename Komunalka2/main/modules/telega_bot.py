@@ -2,9 +2,9 @@ import telebot
 
 PATH_SCREEN = 'screen/shot.jpg'
 
-users = [304417210, 5371210419]
+users = []
 
-bot = telebot.TeleBot('5776871255:AAHNjZQK8or81pglDeJJgSDh_xV8bJQQPro')
+bot = telebot.TeleBot()
 
 # @bot.message_handler(commands=['start'])
 # def mess(message):
