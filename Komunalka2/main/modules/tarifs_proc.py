@@ -41,5 +41,8 @@ class Tarifs:
         j[name] = ob
         write_to_json(PATH, j)
 
+    def get_tarifs_from_name(self, name):
+        return self.__TARIFS[name]
+
 
 

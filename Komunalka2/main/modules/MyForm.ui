@@ -1688,7 +1688,7 @@
          <rect>
           <x>10</x>
           <y>20</y>
-          <width>741</width>
+          <width>751</width>
           <height>71</height>
          </rect>
         </property>
@@ -4547,7 +4547,7 @@
          <rect>
           <x>10</x>
           <y>90</y>
-          <width>741</width>
+          <width>751</width>
           <height>71</height>
          </rect>
         </property>
@@ -5927,7 +5927,7 @@
          <rect>
           <x>10</x>
           <y>160</y>
-          <width>741</width>
+          <width>751</width>
           <height>71</height>
          </rect>
         </property>
@@ -7274,7 +7274,7 @@
           <string extracomment="число"/>
          </property>
          <property name="placeholderText">
-          <string>показники</string>
+          <string>грн</string>
          </property>
         </widget>
         <widget class="QLineEdit" name="gaz_tarif">
@@ -7336,7 +7336,7 @@
          <rect>
           <x>10</x>
           <y>230</y>
-          <width>741</width>
+          <width>751</width>
           <height>71</height>
          </rect>
         </property>
@@ -9855,7 +9855,7 @@
           <string notr="true">color:#4c4a48</string>
          </property>
          <property name="text">
-          <string>TextLabel</string>
+          <string/>
          </property>
         </widget>
         <widget class="QLabel" name="voda_story_pok">
@@ -9879,7 +9879,7 @@
           <string notr="true">color:#4c4a48</string>
          </property>
          <property name="text">
-          <string>TextLabel</string>
+          <string/>
          </property>
         </widget>
         <widget class="QLabel" name="gaz_story_pok">
@@ -9903,7 +9903,7 @@
           <string notr="true">color:#4c4a48</string>
          </property>
          <property name="text">
-          <string>TextLabel</string>
+          <string/>
          </property>
         </widget>
         <widget class="QLabel" name="el_story_sum">
@@ -9915,11 +9915,19 @@
            <height>21</height>
           </rect>
          </property>
+         <property name="font">
+          <font>
+           <family>Bahnschrift SemiBold</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
          <property name="styleSheet">
           <string notr="true">color:#4c4a48</string>
          </property>
          <property name="text">
-          <string>TextLabel</string>
+          <string/>
          </property>
         </widget>
         <widget class="QLabel" name="voda_story_sum">
@@ -9931,11 +9939,19 @@
            <height>21</height>
           </rect>
          </property>
+         <property name="font">
+          <font>
+           <family>Bahnschrift SemiBold</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
          <property name="styleSheet">
           <string notr="true">color:#4c4a48</string>
          </property>
          <property name="text">
-          <string>TextLabel</string>
+          <string/>
          </property>
         </widget>
         <widget class="QLabel" name="gaz_story_sum">
@@ -9947,11 +9963,19 @@
            <height>21</height>
           </rect>
          </property>
+         <property name="font">
+          <font>
+           <family>Bahnschrift SemiBold</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
          <property name="styleSheet">
           <string notr="true">color:#4c4a48</string>
          </property>
          <property name="text">
-          <string>TextLabel</string>
+          <string/>
          </property>
         </widget>
         <widget class="QLabel" name="dom_story_sum">
@@ -9963,11 +9987,19 @@
            <height>20</height>
           </rect>
          </property>
+         <property name="font">
+          <font>
+           <family>Bahnschrift SemiBold</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
          <property name="styleSheet">
           <string notr="true">color:#4c4a48</string>
          </property>
          <property name="text">
-          <string>TextLabel</string>
+          <string/>
          </property>
         </widget>
         <widget class="QLabel" name="all_sum_story">
@@ -9981,14 +10013,17 @@
          </property>
          <property name="font">
           <font>
+           <family>Bahnschrift SemiBold</family>
            <pointsize>13</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
           </font>
          </property>
          <property name="styleSheet">
           <string notr="true">color: red</string>
          </property>
          <property name="text">
-          <string>TextLabel</string>
+          <string/>
          </property>
         </widget>
        </widget>

@@ -12,13 +12,15 @@ class AllItems:
             'limit': None,
             'actual': None,
             'prev': None,
-            'sum': None
+            'sum': None,
+            'raznica': None
         },
         'voda': {
             'actual': None,
             'prev': None,
             'tarif': None,
-            'sum': None
+            'sum': None,
+            'raznica': None
         },
         'gaz': {
             'isLich': False,
@@ -26,7 +28,8 @@ class AllItems:
             'prev': None,
             'tarif': None,
             'transit': None,
-            'sum': None
+            'sum': None,
+            'raznica': None
         },
         'dom': {
             'actual': None
@@ -55,20 +58,25 @@ class AllItems:
 class KomunItem:
     data = {}
 
-    def __init__(self, name):
+    def __init__(self, data, name):
+        self.data = data
         self.__name = name
 
-    @staticmethod
-    def raznica(new_data, old_data):
-        return new_data["actual"] - old_data["actual"]
+    def raznica(self):
+        r = 0
+        if self.data["actual"] and self.data["prev"]:
+            r = self.data["actual"] - self.data["prev"]
+            self.data['raznica'] = r
+        return r
 
     @staticmethod
     def all_price_sum(list_price):
         return sum(list_price)
 
-    @staticmethod
-    def item_price_sum(new_data, old_data):
-        return KomunItem.raznica(new_data, old_data) * new_data['tarif']
+    def item_price_sum(self):
+        summ = self.raznica() * self.data['tarif']
+        self.data['sum'] = float(format(summ, '.2f'))
+        return float(format(summ, '.2f'))
 
     def get_name(self):
         return self.__name
@@ -78,38 +86,40 @@ class KomunItem:
 
 
 class Electro(KomunItem):
-    def __init__(self, new_data, name='electro'):
-        super().__init__(name)
-        self.data = new_data
+    def __init__(self, data, name='electro'):
+        super().__init__(data, name)
 
-    def item_price_sum(self, new_data, old_data):
-        r = self.raznica(new_data, old_data)
+    def item_price_sum(self):
+        r = self.raznica()
+        summ = 0
         if self.data['limit'] > r:
-            return self.data['tarif']['min'] * r
+            summ = self.data['min'] * r
         else:
-            return self.data['tarif']['max'] * r
+            summ = self.data['max'] * r
+        self.data['sum'] = float(format(summ, '.2f'))
+        return float(format(summ, '.2f'))
 
 class Voda(KomunItem):
-    def __init__(self,new_data, name='voda'):
-        super().__init__(name)
-        self.data = new_data
+    def __init__(self, data, name='voda'):
+        super().__init__(data, name)
 
 class Gaz(KomunItem):
-    def __init__(self, new_data, name='gaz'):
-        super().__init__(name)
-        self.data = new_data
+    def __init__(self, data, name='gaz'):
+        super().__init__(data, name)
 
-    def item_price_sum(self, flag=False, new_data=None, old_data=None):
+    def item_price_sum(self, flag=False):
+        summ = 0
         if flag:
             self.data['isLich'] = flag
-            return (self.data['tarif'] * self.raznica(new_data, old_data)) + self.data['transit']
+            summ = (self.data['tarif'] * self.raznica()) + self.data['transit']
         else:
-            return self.data['actual']
+            summ = self.data['actual']
+        self.data['sum'] = float(format(summ, '.2f'))
+        return float(format(summ, '.2f'))
 
 class Dom(KomunItem):
-    def __init__(self, new_data, name='dom'):
-        super().__init__(name)
-        self.data = new_data
+    def __init__(self, data, name='dom'):
+        super().__init__(data, name)
 
-    def item_price_sum(self, data=True):
+    def item_price_sum(self):
         return self.data['actual']
