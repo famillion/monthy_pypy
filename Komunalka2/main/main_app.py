@@ -65,18 +65,44 @@ class Kommunalka(QtWidgets.QMainWindow):
         # кнопки вкладки розрахунки
         self.ui.sum_btn.clicked.connect(self.rozrahuvat_btn)
         self.ui.scrin_to_telega_btn.clicked.connect(self.screen_to_telega)
+        self.ui.save_all_btn.clicked.connect(self.save_new_all_to_json)
 
-        self.new_obj = {}
+        self.new_obj = {
+            'electro': None,
+            'voda': None,
+            'gaz': None,
+            'dom': None
+        }
         self.gaz_r = 0
 
-        print(self.isCheckLich)
-    # перевірка чи розрахунок по газу по лічільнику і встановлення лейблу
-    def rozrahuvat_btn(self):
-        self.new_obj['electro'] = self.set_electro_field()
-        self.new_obj['voda'] = self.set_voda_field()
-        self.new_obj['gaz'] = self.set_gaz_field()
-        self.new_obj['dom'] = self.set_dom_field()
+    def save_new_all_to_json(self):
+        nob = self.new_obj
+        oob = self.allItems.get_json()
+        def func():
+            oob.append ( nob )
+            self.allItems.write_all_to_json ( oob )
+            self.allItems = alls.AllItems ()
+            self.mess.information ( self, "Збережено!", "Вітаю! Завдання виконано! Все збережено!" )
 
+        if (nob['electro']) and (nob['voda']) and (nob['gaz']) and (nob['dom']):
+            if (nob['date'] == oob[-1]['date']) and (nob['electro']['actual'] == oob[-1]['electro']['actual']):
+                m = self.mess.information(self, 'Увага', "Схоже ці результати вже збережені! Всеодно зберегти?",
+                                          QtWidgets.QMessageBox.Yes, QtWidgets.QMessageBox.No)
+                if m == QtWidgets.QMessageBox.Yes:
+                    func()
+            else:
+                func()
+        else:
+            self.mess.information(self, 'Не збережено!',
+                                  'Не зміг зберегти, бо не все заповнено! Я зберігаю лише повністю заповнені результати, а так можеш і скрін зробити!')
+
+    def rozrahuvat_btn(self):
+        self.new_obj = {
+            'electro': self.set_electro_field(),
+            'voda': self.set_voda_field(),
+            'gaz': self.set_gaz_field(),
+            'dom': self.set_dom_field()
+        }
         sum_list = [
             self.new_obj['electro']['sum'] if self.new_obj['electro'] else 0,
             self.new_obj['voda']['sum'] if self.new_obj['voda'] else 0,
@@ -84,7 +110,7 @@ class Kommunalka(QtWidgets.QMainWindow):
             self.new_obj['dom']['actual'] if self.new_obj['dom'] else 0
         ]
 
-        self.new_obj['allSum'] = sum(sum_list)
+        self.new_obj['allSum'] = float(format(sum(sum_list), '.2f'))
         self.new_obj['date'] = self.ui.date_new.text()
 
         self.ui.sum_label.setText(str(self.new_obj['allSum']))
